@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    function:
+      definition: explicitConsumer;explicitProducer;implicitConsumer
+    stream:
+      function:
+        bindings:
+          explicitConsumer-in-0: explicitConsumer-in
+          implicitConsumer-in-0: implicitConsumer-in
+          explicitProducer-out-0: explicitProducer-out
+      kafka:
+        bindings:
+          implicitConsumer-in.consumer.startOffset: latest
+          explicitConsumer-in.consumer.startOffset: latest
+        binder:
+          brokers: <kafka broker url>
+      bindings:
+        explicitConsumer-in:
+          group: test-spring-cloud-function
+          destination: <input topic name>
+        implicitConsumer-in:
+          group: test-spring-cloud-function-implicit
+          destination: <input topic name>
+        explicitProducer-out:
+          producer:
+            headerMode: none
+          destination: <output topic name>
