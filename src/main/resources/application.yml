@@ -21,6 +21,8 @@ spring:
         implicitConsumer-in:
           group: test-spring-cloud-function-implicit
           destination: <input topic name>
+          consumer:
+            autoStartup: false
         explicitProducer-out:
           producer:
             headerMode: none
